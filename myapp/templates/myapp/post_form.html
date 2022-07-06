@@ -1,0 +1,33 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-9">
+        <br>
+        <h2>新規投稿の作成・編集</h2>
+        <br>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="">タイトル</label>
+                {{ form.title }}
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="">サムネイル画像</label>
+                {{ form.thumbnail }}
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="">内容</label>
+                {{ form.content }}
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" data-mdb-ripple-color="dark">保存</button>
+            <br><br>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

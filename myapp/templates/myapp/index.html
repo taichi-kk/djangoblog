@@ -1,0 +1,43 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<!-- Start your project here-->
+<div class="p-5 text-center bg-image rounded-3" style="
+background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+height: 400px;
+">
+  <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-white">
+        <h1 class="mb-3">This is my first blog created using Django by Kawakami.</h1>
+        <a class="btn btn-light" href="{% url 'myapp:post_create' %}" role="button">新規投稿</a>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<!-- card -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for item in post_list %}
+  <div class="col">
+    <div class="card h-100"><span>&ensp;&ensp;{{ item.author }}</span>
+      {% if item.thumbnail %}
+      <img src="{{ item.thumbnail.url }}" class="card-img-top" alt="{{ item.title }}" height="280px" />
+      {% else %}
+      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="{{ item.title }}" />
+      {% endif %}
+      <a href="{% url 'myapp:post_detail' item.id %}"></a>
+      <div class="card-body">
+        <h3 class="card-title">{{ item.title }}</h3>
+        <p class="card-text">{{ item.content | safe | truncatechars_html:30 }}</p>
+        <a href="{% url 'myapp:post_detail' item.id %}" class="btn btn-primary">続きを読む</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<br>
+</main>
+
+{% endblock %}

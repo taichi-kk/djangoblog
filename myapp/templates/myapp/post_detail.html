@@ -1,0 +1,28 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-10">
+        <br>
+        <div class="card">
+            {% if object.thumbnail %}
+            <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="{{ object.title }}" />
+            {% else %}
+            <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
+                alt="{{ object.title }}" />
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ object.title }}</h5>
+                <p class="card-text">{{ object.content | safe | linebreaksbr | urlize }}</p>
+            {% if object.author == request.user %}
+                <a href="{% url 'myapp:post_update' object.pk %}" class="btn btn-primary">編集</a>
+                <a href="{% url 'myapp:post_delete' object.pk %}" class="btn btn-danger">削除</a>
+            {% endif %}
+            </div>
+        </div>
+        <br><br>
+    </div>
+</div>
+
+{% endblock %}
